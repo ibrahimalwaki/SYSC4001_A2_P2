@@ -1,9 +1,4 @@
-// Part II – Step 2: Parent process (Process 1)
-// - Increments a counter forever
-// - Prints "Cycle number: N" each loop, and when the counter is a multiple of 3
-// - Uses exec() to launch the separate child executable (Process 2)
-// Build: gcc -O2 -Wall -Wextra -o parent parent.c
-// Run:   ./parent  (make sure ./child is compiled in the same folder)
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +14,6 @@ static void on_term(int sig) {
 }
 
 int main(void) {
-    // Handle Ctrl+C and kill signals nicely (optional).
     signal(SIGINT,  on_term);
     signal(SIGTERM, on_term);
 
@@ -32,15 +26,13 @@ int main(void) {
     }
 
     if (pid == 0) {
-        // Child of fork(): replace image with the separate child executable.
-        // Ensure "child" is compiled in the same directory.
+       
         execl("./child", "./child", (char *)NULL);
         // If execl returns, it failed:
         perror("execl");
         _exit(127);
     }
 
-    // Parent (Process 1): incrementing loop with cycle numbers + multiples-of-3 reporting
     unsigned long cycle = 0;
     int counter = 0;
 
@@ -59,11 +51,9 @@ int main(void) {
         counter++;
         cycle++;
 
-        // Slow the display: 200 ms
         usleep(200000);
     }
 
-    // On signal/exit path, just exit. (Spec says to use `ps`/`kill` to stop.)
     printf("[P1 parent %d] exiting\n", getpid());
     return 0;
 }
