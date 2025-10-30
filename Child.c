@@ -1,8 +1,4 @@
-// Part II – Step 2: Child process (Process 2)
-// - Decrements a counter forever
-// - Prints the cycle number each loop
-// - Marks multiples of 3 (including 0)
-// Build: gcc -O2 -Wall -Wextra -o child child.c
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,15 +26,12 @@ int main(void) {
     fflush(stdout);
 
     while (running) {
-        // Print first (so we see 0 on the first iteration), then decrement.
         if (is_multiple_of(counter, multiple)) {
             printf("Cycle number: %lu – %d is a multiple of %d\n",
                    cycle, counter, multiple);
         } else {
             printf("Cycle number: %lu (counter=%d)\n", cycle, counter);
         }
-
-        // Next state: decrement for the following iteration
         counter--;
         cycle++;
 
