@@ -19,7 +19,7 @@ int main(void) {
     signal(SIGTERM, on_term);
 
     const int multiple = 3;
-    int counter = 0;            // initialize at 0 (as required)
+    int counter = 0;            // initialize at 0
     unsigned long cycle = 0;    // show cycle number every iteration
 
     printf("[P2 child] PID=%d started (decrementing)\n", getpid());
